@@ -1,54 +1,54 @@
 <?php
- require_once __DIR__ . "/classes/Auther.class.php";
- require_once __DIR__ . "/classes/Users.class.php";
+require_once __DIR__ . "/classes/Auther.class.php";
+require_once __DIR__ . "/classes/Users.class.php";
 
- $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : "";
+$user_id = isset($_POST['user_id']) ?$_POST['user_id'] : '';
 
- $auther = new Auther();
- $users = new Users();
- $user = $users->getDetail($user_id);
- $suther->login_chk();
-
+$auther = new Auther();
+$Users = new Users();
+$user = $Users->getDetail($user_id);
+$auther->login_chk();
 ?>
 <!doctype html>
 <html lang="en">
-
- <head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>ユーザ登録</title>
+    <title>ユーザー登録</title>
   </head>
-
   <body>
-    <h1>ユーザ登録</h1>
-
-            <form method="POST" action="./delet_comp.php">
-				<div class="mb-3">
-					<label for="exampleInputName" class="form-label">User ID</label>
-					<input type="text" class="form-control" readonly id="exampleInputName" name="user_name" aria-describedby="emailHelp" value="<?php echo $user[ 'user_id' ];; ?>">
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputName" class="form-label">User Name</label>
-					<input type="text" class="form-control" readonly id="exampleInputName" name="user_name" aria-describedby="emailHelp" value="<?php echo $user[ 'user_name' ];; ?>">
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputEmail" class="form-label">Email address</label>
-					<input type="email" class="form-control" readonly id="exampleInputEmail" name="mail_address" aria-describedby="emailHelp" value="<?php echo $user[ 'mali_address' ];; ?>">
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputPassword" class="form-label">Password</label>
-					<input type="password" class="form-control" readonly id="exampleInputPassword" name="pass_word" value="<?php echo str_repeat("・",6); ?>">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-			<a href="./detail.php?user_id=<?php echo $user_id;?>"class="btn btn-primary">Back</a>
-
+    <h1>ユーザーサイト</h1>        
+        <form method="POST" action="./delete_comp.php">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            <div class="row mb-3">
+                <label for="user_name" class="col-sm-2 col-form-label">User_Name</label>
+                <div class="col-sm-10">
+                <input type="text" readonly class="form-control <?php if( !empty($errors['user_name']) ) echo "border-danger text-danger"; ?>" id="name" name="user_name" value ="<?php echo $user['user_name'];?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="mail_adress" class="col-sm-2 col-form-label">Mail_Adress</label>
+                <div class="col-sm-10">
+                <input type="mail" readonly class="form-control <?php if( !empty($errors['mail_adress']) ) echo "border-danger text-danger"; ?>" id="mail" name="mail_adress" value ="<?php echo $user['mail_adress'];?>">
+                </div>
+            </div>
+             <div class="row mb-3">
+                <label for="pass_word" class="col-sm-2 col-form-label">PassWord</label>
+                <div class="col-sm-10">
+                <input type="password" readonly class="form-control <?php if( !empty($errors['pass_word']) ) echo "border-danger text-danger"; ?>" id="pass"name="pass_word" value ="<?php echo str_repeat("・", 6 ); ?>">
+                </div>
+            </div>
+            
+            <button type= "submit" class="btn btn-primary">更新</button>
+           
+        </form>
+        <a href= "./detail.php?user_id=<?php echo $user_id; ?>"class="btn btn-primary">Back</a>
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
